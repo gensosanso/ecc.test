@@ -1,7 +1,6 @@
-import { reactive, ref } from "vue";
+import { ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { axiosClient, axiosClientFile } from "@/axios";
-
+import { axiosClient } from "@/axios";
 import { createConfirmDialog } from "vuejs-confirm-dialog";
 import ConfirmModal from "@/components/ConfirmModal.vue";
 
@@ -12,198 +11,160 @@ export default function useUsers() {
     const loading = ref(false);
     const isFinish = ref(false);
     const users = ref([]);
-    const user = ref([]);
+    const user = ref({});
     const selectArray = ref([]);
     const searchField = ref("username");
     const searchValue = ref("");
     const headers = [
-       { text: "Avatar", value: "avatar" },
+        { text: "Avatar", value: "avatar" },
         { text: "Name", value: "username" },
         { text: "Phone", value: "phone_number" },
         { text: "Email", value: "email" },
-       { text: "Role", value: "user_type" },
-       { text: "Confirmed", value: "confirmed" },
-       { text: "Blocked", value: "blocked" },
+        { text: "Role", value: "user_type" },
+        { text: "Confirmed", value: "confirmed" },
+        { text: "Blocked", value: "blocked" },
         { text: "Action", value: "id" },
     ];
-
 
     const cleanErrors = () => {
         errors.value = [];
     };
 
     const getUsers = async () => {
-        errors.value = [];
+        cleanErrors();
         loading.value = true;
-        await axiosClient
-            .get(`/users`)
-            .then((response) => {
-                users.value = response.data.data;
-            })
-            .catch((e) => {
-                loading.value = false;
-                if (e.response.status == 422) {
-                    for (const key in e.response.data.errors)
-                        errors.value.push(e.response.data.errors[key][0]);
-                } else {
-                    errors.value.push(e.response.data.message);
-                }
-                router.replace({
-                    name: route.name,
-                    hash: '#errors'
-                });
-            });
-    }
+        try {
+            const response = await axiosClient.get(`/users`);
+            users.value = response.data;
+        } catch (e) {
+            handleErrors(e);
+        } finally {
+            loading.value = false;
+        }
+    };
 
     const getUser = async (id) => {
-        errors.value = [];
+        cleanErrors();
         loading.value = true;
-        await axiosClient
-            .get(`/users/${id}`)
-            .then((response) => {
-                user.value = response.data.data;
-            })
-            .catch((e) => {
-                loading.value = false;
-                if (e.response.status == 422) {
-                    for (const key in e.response.data.errors)
-                        errors.value.push(e.response.data.errors[key][0]);
-                } else {
-                    errors.value.push(e.response.data.message);
-                }
-                router.replace({
-                    name: route.name,
-                    hash: '#errors'
-                });
-            });
-    }
+        try {
+            const response = await axiosClient.get(`/users/${id}`);
+            user.value = response.data;
+        } catch (e) {
+            handleErrors(e);
+        } finally {
+            loading.value = false;
+        }
+    };
 
     const getUserType = async (type, officialParish) => {
-        errors.value = [];
+        cleanErrors();
         loading.value = true;
-        await axiosClient
-            .post(`/users/type/${type}`, {officialParish:officialParish})
-            .then((response) => {
-                users.value = response.data.data;
-            })
-            .catch((e) => {
-                loading.value = false;
-                if (e.response.status == 422) {
-                    for (const key in e.response.data.errors)
-                        errors.value.push(e.response.data.errors[key][0]);
-                } else {
-                    errors.value.push(e.response.data.message);
-                }
-                router.replace({
-                    name: route.name,
-                    hash: '#errors'
-                });
+        try {
+            const response = await axiosClient.post(`/users/type/${type}`, {
+                officialParish: officialParish,
             });
-    }
+            users.value = response.data;
+        } catch (e) {
+            handleErrors(e);
+        } finally {
+            loading.value = false;
+        }
+    };
 
     const deleteUsers = async () => {
-        if (selectArray.value.length != 0) {
-
-            const deleteIds = ref([]);
-            selectArray.value.forEach((d) => {
-                deleteIds.value.push(d.id);
-            });
+        if (selectArray.value.length !== 0) {
+            const deleteIds = selectArray.value.map((d) => d.id);
 
             const { reveal, onConfirm } = createConfirmDialog(ConfirmModal, {
                 question:
-                "Are you sure you want to delete its item(s)? All data will be permanently deleted. This action cannot be undone.",
+                    "Are you sure you want to delete these item(s)? All data will be permanently deleted. This action cannot be undone.",
                 title: "Delete User !!!",
                 confirmLabel: "Delete",
-                cancelLabel: "Cancel"
+                cancelLabel: "Cancel",
             });
+
             onConfirm(async () => {
-                await axiosClient
-                .delete(`/users/${JSON.stringify({ ...deleteIds.value })}`)
-                .then((response) => {
+                try {
+                    await axiosClient.delete(
+                        `/users/${JSON.stringify(deleteIds)}`
+                    );
                     getUsers();
-                })
-                .catch((e) => {
-                    loading.value = false;
-                    if (e.response.status == 422) {
-                        for (const key in e.response.data.errors)
-                            errors.value.push(e.response.data.errors[key][0]);
-                    } else {
-                        errors.value.push(e.response.data.message);
-                    }
-                    router.replace({
-                        name: route.name,
-                        hash: '#errors'
-                    });
-                });
+                } catch (e) {
+                    handleErrors(e);
+                }
             });
+
             reveal();
         }
-    }
-
-    
+    };
 
     const confirmedUser = async (id) => {
         const { reveal, onConfirm } = createConfirmDialog(ConfirmModal, {
             question:
-              "Are you sure you want to Change Confirmed its item(s)? ",
+                "Are you sure you want to change the confirmed status of this item?",
             title: "Change Confirmed Status!!!",
             confirmLabel: "Change Confirmed",
-            cancelLabel: "Cancel"
-          });
-          onConfirm(async () => {
-            await axiosClient
-            .put(`/users/confirmed/${id}`)
-            .then((response) => {
-                getUsers();
-            })
-
-            .catch((e) => {
-                loading.value = false;
-                if (e.response.status == 422) {
-                    for (const key in e.response.data.errors)
-                        errors.value.push(e.response.data.errors[key][0]);
-                } else {
-                    errors.value.push(e.response.data.message);
-                }
-                router.replace({
-                    name: route.name,
-                    hash: '#errors'
-                });
-            });
+            cancelLabel: "Cancel",
         });
-        reveal();
-    }
 
-    const toogleBlocked = async (id) => {
+        onConfirm(async () => {
+            try {
+                await axiosClient.put(`/users/confirmed/${id}`);
+                getUsers();
+            } catch (e) {
+                handleErrors(e);
+            }
+        });
+
+        reveal();
+    };
+
+    const updateUser = async (id, data) => {
+        cleanErrors();
+        loading.value = true;
+        try {
+            await axiosClient.put(`/users/${id}`, data);
+            isFinish.value = true;
+        } catch (e) {
+            handleErrors(e);
+        } finally {
+            loading.value = false;
+        }
+    };
+
+
+
+    const toggleBlocked = async (id) => {
         const { reveal, onConfirm } = createConfirmDialog(ConfirmModal, {
             question:
-              "Are you sure you want to Change Blocked Status of its item(s)? ",
+                "Are you sure you want to change the blocked status of this item?",
             title: "Change Blocked Status !!!",
             confirmLabel: "Change Blocked",
-            cancelLabel: "Cancel"
-          });
-          onConfirm(async () => {
-            await axiosClient
-            .put(`/users/toogle-blocked/${id}`)
-            .then((response) => {
-                getUsers();
-            })
-            .catch((e) => {
-                loading.value = false;
-                if (e.response.status == 422) {
-                    for (const key in e.response.data.errors)
-                        errors.value.push(e.response.data.errors[key][0]);
-                } else {
-                    errors.value.push(e.response.data.message);
-                }
-                router.replace({
-                    name: route.name,
-                    hash: '#errors'
-                });
-            });
+            cancelLabel: "Cancel",
         });
+
+        onConfirm(async () => {
+            try {
+                await axiosClient.put(`/users/toogle-blocked/${id}`);
+                getUsers();
+            } catch (e) {
+                handleErrors(e);
+            }
+        });
+
         reveal();
-    }
+    };
+
+    const handleErrors = (e) => {
+        loading.value = false;
+        if (e.response && e.response.status === 422) {
+            for (const key in e.response.data.errors) {
+                errors.value.push(e.response.data.errors[key][0]);
+            }
+        } else {
+            console.error(e);
+        }
+    };
 
     return {
         users,
@@ -219,7 +180,9 @@ export default function useUsers() {
         cleanErrors,
         deleteUsers,
         confirmedUser,
-        toogleBlocked,
+        toggleBlocked,
         getUserType,
-    }
+
+        updateUser
+    };
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 
 use App\Models\UserPrayergroupDetail;
@@ -64,7 +65,7 @@ class UserController extends Controller
         ]);
 
 
-        
+
         UserFaithfulDetail::create([
             'user_id' => $user->id
         ]);
@@ -85,7 +86,7 @@ class UserController extends Controller
             'user_id' => $user->id
         ]);
 
-    
+
 
         $user->save();
 
@@ -122,7 +123,7 @@ class UserController extends Controller
     /**
      * Toggle user blocked status.
      */
-    public function toogleBlocked (User $user)
+    public function toogleBlocked(User $user)
     {
         $user->blocked = !$user->blocked;
         $user->save();
@@ -132,29 +133,29 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update2(StoreUserRequest $request, User $user): Response
+    public function update(UpdateUserRequest $request, User $user)
     {
-        // Implement the logic to update the user resource here.
-
-
         $fields = $request->validated();
 
-        $user->update2([
+        $user->update([
             'username' => $fields['username'],
             'lastname' => $fields['lastname'],
             'parish_official' => $fields['parish_official'],
             'email' => $fields['email'],
             'user_type' => $fields['user_type'],
-            'password' => Hash::make($fields['password']),
+            // 'password' => Hash::make($fields['password']),
             'confirmed' => true,
         ]);
-        return response()->noContent();
+
+        return new UserResource($user);
     }
 
 
 
 
- 
+
+
+
     /**
      * Destroy the specified resources.
      */

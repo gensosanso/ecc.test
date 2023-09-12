@@ -14,51 +14,59 @@ use Illuminate\Support\Facades\Route;
 Route::post("/register", [AuthenticateController::class, 'register']);
 Route::post("/login", [AuthenticateController::class, 'login']);
 Route::post("/login-admin", [AuthenticateController::class, 'loginAdmin']);
-Route::post("/store", [UserController::class, 'store']);
+
 Route::get("/continents", [ContinentController::class, 'index']);
-
 Route::get("/zoneds", [ZonedController::class, 'index']);
-
 Route::get("/countries", [CountryController::class, 'index']);
-
 Route::get("/cities", [CityController::class, 'index']);
-
 Route::get("/departments", [DepartmentController::class, 'index']);
 
+Route::post("/store", [UserController::class, 'store']);
 Route::post("/users/type/{type}", [UserController::class, 'getByType']);
-
 Route::apiResource('users', UserController::class);
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
-
-    Route::put("/users/confirmed/{user}", [UserController::class, 'confirmed']);
-    Route::put("/users/toogle-blocked/{user}", [UserController::class, 'toogleBlocked']);
-
-    Route::post("/continents", [ContinentController::class, 'store']);
-    Route::get("/continents/{continent}", [ContinentController::class, 'show']);
-    Route::put("/continents/{continent}", [ContinentController::class, 'update']);
-    Route::delete("/continents/{continent}", [ContinentController::class, 'destroy']);
-
-    Route::post("/zoneds", [ZonedController::class, 'store']);
-    Route::get("/zoneds/{zoned}", [ZonedController::class, 'show']);
-    Route::put("/zoneds/{zoned}", [ZonedController::class, 'update']);
-    Route::delete("/zoneds/{zoned}", [ZonedController::class, 'destroy']);
-
-    Route::post("/countries", [CountryController::class, 'store']);
-    Route::get("/countries/{country}", [CountryController::class, 'show']);
-    Route::put("/countries/{country}", [CountryController::class, 'update']);
-    Route::delete("/countries/{country}", [CountryController::class, 'destroy']);
-
-    Route::post("/cities", [CityController::class, 'store']);
-    Route::get("/cities/{city}", [CityController::class, 'show']);
-    Route::put("/cities/{city}", [CityController::class, 'update']);
-    Route::delete("/cities/{city}", [CityController::class, 'destroy']);
-
-    Route::post("/departments", [DepartmentController::class, 'store']);
-    Route::get("/departments/{department}", [DepartmentController::class, 'show']);
-    Route::put("/departments/{department}", [DepartmentController::class, 'update']);
-    Route::put("/users-update/{user}", [UserController::class, 'update2']);
-    Route::delete("/departments/{department}", [DepartmentController::class, 'destroy']);
-
     Route::post("/logout", [AuthenticateController::class, 'logout']);
+
+    Route::controller(UserController::class)->group(function () {
+        Route::put("/users/confirmed/{user}", 'confirmed');
+        Route::put("/users/toogle-blocked/{user}", 'toogleBlocked');
+        Route::put("/users-update/{user}", 'update2');
+        // Route::post('/api/users/{user}', 'update2')->name('api.users.update');
+    });
+
+    Route::controller(ContinentController::class)->group(function () {
+        Route::post("/continents", 'store');
+        Route::get("/continents/{continent}", 'show');
+        Route::put("/continents/{continent}", 'update');
+        Route::delete("/continents/{continent}", 'destroy');
+    });
+
+    Route::controller(ZonedController::class)->group(function () {
+        Route::post("/zoneds", 'store');
+        Route::get("/zoneds/{zoned}", 'show');
+        Route::put("/zoneds/{zoned}", 'update');
+        Route::delete("/zoneds/{zoned}", 'destroy');
+    });
+
+    Route::controller(CountryController::class)->group(function () {
+        Route::post("/countries", 'store');
+        Route::get("/countries/{country}", 'show');
+        Route::put("/countries/{country}", 'update');
+        Route::delete("/countries/{country}", 'destroy');
+    });
+
+    Route::controller(CityController::class)->group(function () {
+        Route::post("/cities", 'store');
+        Route::get("/cities/{city}", 'show');
+        Route::put("/cities/{city}", 'update');
+        Route::delete("/cities/{city}", 'destroy');
+    });
+
+    Route::controller(DepartmentController::class)->group(function () {
+        Route::post("/departments", 'store');
+        Route::get("/departments/{department}", 'show');
+        Route::put("/departments/{department}", 'update');
+        Route::delete("/departments/{department}", 'destroy');
+    });
 });

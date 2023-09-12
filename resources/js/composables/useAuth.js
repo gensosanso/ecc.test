@@ -38,9 +38,6 @@ export default function useAuth() {
             });
     };
 
-
-
-    
     const createUser1 = async (data) => {
         errors.value = [];
         loading.value = true;
@@ -49,7 +46,9 @@ export default function useAuth() {
             .then((response) => {
                 isFinish.value = true;
                 loading.value = false;
-                
+                router.push({
+                    name: "admin.user.index",
+                });
             })
             .catch((e) => {
                 loading.value = false;
@@ -60,11 +59,13 @@ export default function useAuth() {
                     errors.value.push(e.response.data.message);
                 }
                 router.replace({
-                    name: route.name,
-                    hash: "#errors",
+                    name: "admin.user.index",
+
                 });
             });
     };
+
+
 
     const loginUser = async (data) => {
         errors.value = [];
@@ -90,33 +91,7 @@ export default function useAuth() {
                 });
             });
     };
-    const updateUser2 = async (id, data) => {
-        errors.value = [];
-        loading.value = true;
-        await axiosClient
-          .put(`/api/users-update/${id}`, data)
-          .then((response) => {
-            isFinish.value = true;
-            loading.value = false;
-          })
-          .catch((e) => {
-            loading.value = false;
-            if (e.response.status == 422) {
-              for (const key in e.response.data.errors) {
-                errors.value.push(e.response.data.errors[key][0]);
-              }
-            } else {
-              errors.value.push(e.response.data.message);
-            }
-            router.replace({
-              name: route.name,
-              hash: '#errors'
-            });
-          });
-      };
 
-
-      
     const loginAdmin = async (data) => {
         errors.value = [];
         loading.value = true;
@@ -166,10 +141,8 @@ export default function useAuth() {
         logout,
         createUser,
         createUser1,
-        updateUser2,
         loginUser,
         loginAdmin,
         cleanErrors,
-
     };
 }

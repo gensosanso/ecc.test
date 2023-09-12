@@ -12,107 +12,62 @@
                 <h2 class="text-md font-light text-gray-700">
                     Edit a new User
                 </h2>
-                <form @submit.prevent="saveUser()" id="userform">
+                <form @submit.prevent="saveUser()">
                     <div class="w-full">
                         <label class="">Type de profil</label>
-                        <select
-                            v-model="user.user_type"
-                            class="form-select p-2 outline-none mt-1 border block border-gray-300 rounded-lg shadow-sm w-full"
-                        >
-                            <option
-                                v-for="role in roles"
-                                :key="role.id"
-                                :value="role.id"
-                            >
+                        <select v-model="user.user_type"
+                            class="form-select p-2 outline-none mt-1 border block border-gray-300 rounded-lg shadow-sm w-full">
+                            <option v-for="role in roles" :key="role.id" :value="role.id">
                                 {{ role.name }}
                             </option>
                         </select>
                     </div>
                     <div class="w-full mt-3">
                         <label class="">
-                            <span v-if="user.user_type == 'faithful'"
-                                >Nom du Fidele</span
-                            >
-                            <span v-else-if="user.user_type == 'parish'"
-                                >Nom de la Paroisse</span
-                            >
-                            <span v-else-if="user.user_type == 'prayerGroup'"
-                                >Nom du groupe de prière
+                            <span v-if="user.user_type == 'faithful'">Nom du Fidele</span>
+                            <span v-else-if="user.user_type == 'parish'">Nom de la Paroisse</span>
+                            <span v-else-if="user.user_type == 'prayerGroup'">Nom du groupe de prière
                             </span>
-                            <span v-else-if="user.user_type == 'diocese'"
-                                >Nom du diocèse
+                            <span v-else-if="user.user_type == 'diocese'">Nom du diocèse
                             </span>
-                            <span v-else-if="user.user_type == 'seat'"
-                                >Nom du Siège
+                            <span v-else-if="user.user_type == 'seat'">Nom du Siège
                             </span>
                         </label>
-                        <input
-                            v-model="user.username"
+                        <input v-model="user.username"
                             class="border-gray-300 mt-1 border form-input p-2 outline-none block rounded-lg shadow-sm w-full"
-                            type="text"
-                            placeholder="Ex: Marc"
-                        />
+                            type="text" placeholder="Ex: Marc" />
                     </div>
-                    <div
-                        class="w-full mt-3"
-                        v-if="user.user_type == 'faithful'"
-                    >
+                    <div class="w-full mt-3" v-if="user.user_type == 'faithful'">
                         <label class="">Prénom du Fidele</label>
-                        <input
-                            v-model="user.lastname"
+                        <input v-model="user.lastname"
                             class="border-gray-300 mt-1 border form-input p-2 outline-none block rounded-lg shadow-sm w-full"
-                            type="text"
-                            placeholder="Ex: Emmanuel"
-                        />
+                            type="text" placeholder="Ex: Emmanuel" />
                     </div>
-                    <div
-                        class="w-full mt-3"
-                        v-if="user.user_type == 'faithful'"
-                    >
+                    <div class="w-full mt-3" v-if="user.user_type == 'faithful'">
                         <label class="">Chargé paroissial</label>
                         <div class="flex mt-1 items-center space-x-2">
-                            <input
-                                type="radio"
-                                class="form-radio border-gray-300"
-                                id="yes"
-                                v-model="user.parish_official"
-                                :value="true"
-                            />
+                            <input type="radio" class="form-radio border-gray-300" id="yes" v-model="user.parish_official"
+                                :value="1" />
                             <label for="yes">Oui</label>
-                            <input
-                                type="radio"
-                                class="form-radio border-gray-300"
-                                id="no"
-                                v-model="user.parish_official"
-                                :value="false"
-                            />
+                            <input type="radio" class="form-radio border-gray-300" id="no" v-model="user.parish_official"
+                                :value="0" />
                             <label for="no">Non</label>
                         </div>
                     </div>
                     <div class="w-full mt-3">
                         <label class="">Adresse mail</label>
-                        <input
-                            v-model="user.email"
+                        <input v-model="user.email"
                             class="border-gray-300 border form-input p-2 mt-1 outline-none block rounded-lg shadow-sm w-full"
-                            type="email"
-                            placeholder="Ex: nom@xyz.com"
-                        />
+                            type="email" placeholder="Ex: nom@xyz.com" />
                     </div>
-                  
+
                     <div class="mt-6 flex justify-end">
-                        <!-- <button
-                            v-if="loading == 0"
-                            type="submit"
-                            class="rounded bg-primary-blue px-6 py-2 leading-5 text-white focus:outline-none"
-                        >
-                            Save
-                        </button> -->
-                        <button
-                            type="submit"
-                            class="rounded bg-blue-300 px-6 py-2 leading-5 text-white focus:outline-none"
-                        >
+
+                        <button type="submit"
+                            class="rounded bg-green-300 px-6 py-2 leading-5 text-white focus:outline-none">
                             save
                         </button>
+
                     </div>
                 </form>
             </section>
@@ -120,21 +75,19 @@
     </div>
 </template>
 
+
+
 <script setup>
-import { reactive, ref, onMounted } from "vue";
-import Error from "@/components/Error.vue";
-import useAuth from '@/composables/useAuth';
-// import { useAuthenticateStore } from "@/stores/authenticate";
+import { ref, onMounted } from "vue";
+import { useAuthenticateStore } from "@/stores/authenticate";
+import useUser from "@/composables/useUser";
+import { useRouter, useRoute } from "vue-router";
 
-import { axiosClient, axiosClientFile } from "@/axios";
-import useUsers from '@/composables/useUser';
- 
- const  useUser = useUser();
+const auth = useAuthenticateStore();
+const { updateUser, errors, loading, getUser, getUsers, users, isFinish, getUserType, user } = useUser();
 
- 
-
-import { useRouter } from "vue-router";
 const router = useRouter();
+const route = useRoute();
 const roles = [
     { id: "faithful", name: "Fidele" },
     { id: "prayerGroup", name: "Groupe de prière" },
@@ -142,27 +95,19 @@ const roles = [
     { id: "diocese", name: "Diocèse" },
     { id: "seat", name: "Siège" },
 ];
-// const user = reactive({
-//     username: '',
-//     lastname: '',
-//     email: '',
-//     password: '',
-//     parish_official: false,
-//     user_type: 'faithful',
-// })
 
-const { updateUser2, createUser , errors, loading,getUser,getUsers, users,
-        user,
-      
-        isFinish,
-        } =  useAuth()= useUsers();
 
 const saveUser = async () => {
-    await updateUser2();
-    if (errors.value == "") {
+    await updateUser(route.params.id, user.value);
+    if (errors.value.length === 0) {
         router.push({
             name: "admin.user.index",
         });
     }
 };
+
+onMounted(async () => {
+    await getUser(route.params.id);
+})
 </script>
+

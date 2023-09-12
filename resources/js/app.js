@@ -1,10 +1,11 @@
 import './bootstrap';
-import '../css/app.css'; 
+import '../css/app.css';
 
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import Error from "@/components/Error.vue";
+import RegisterSuccess from "@/components/message/RegisterSucess.vue";
 import Spin from "@/components/Spin.vue";
 import { createPinia } from "pinia";
 import Vue3EasyDataTable from "vue3-easy-data-table";
@@ -20,5 +21,6 @@ app.use(pinia);
 app.use(ConfirmDialog);
 app.component("EasyDataTable", Vue3EasyDataTable);
 app.component("Error", Error);
+app.component("RegisterSuccess", RegisterSuccess);
 app.component("Spin", Spin);
 app.mount('#app')

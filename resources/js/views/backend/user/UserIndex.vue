@@ -129,7 +129,7 @@
                         <button
                             type="button"
                             v-if="item.blocked != true"
-                            @click="toogleBlocked(item.id)"
+                            @click="toggleBlocked(item.id)"
                             class="ml-3 text-red-600 hover:underline"
                         >
                             Blocked
@@ -137,7 +137,7 @@
                         <button
                             type="button"
                             v-else
-                            @click="toogleBlocked(item.id)"
+                            @click="toggleBlocked(item.id)"
                             class="ml-3 text-green-600 hover:underline"
                         >
 
@@ -173,7 +173,7 @@ const {
     cleanErrors,
     selectArray,
     deleteUsers,
-    toogleBlocked,
+    toggleBlocked,
 } = useUser();
 
 onMounted(async function () {

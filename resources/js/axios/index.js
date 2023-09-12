@@ -17,10 +17,12 @@ axiosClient.interceptors.request.use((config) => {
     return config;
 });
 
+
 axiosClientFile.interceptors.request.use((config) => {
     config.headers.Authorization = `Bearer ${token}`;
     config.headers["Content-Type"] = `multipart/form-data`;
     return config;
 });
+
 
 export { axiosClient, axiosClientFile };
