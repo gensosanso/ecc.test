@@ -32,7 +32,8 @@ const router = createRouter({
         title: SITE_NAME + " - Home",
       },
     },
-    {
+   
+     {
       path: '/cantiques',
       name: 'cantique',
       components: {
@@ -43,7 +44,20 @@ const router = createRouter({
       meta: {
         title: SITE_NAME + " - Cantiques",
       },
-    },
+     },
+     {
+      path: '/maps',
+      name: 'map',
+      components: {
+        default: () => import('@/components/Map.vue'),
+        header: Header,
+        footer: Footer,
+      },
+      meta: {
+        title: SITE_NAME + " - Map",
+      },
+     },
+
     {
       path: '/evenement',
       name: 'evenement',

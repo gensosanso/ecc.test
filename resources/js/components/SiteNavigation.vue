@@ -88,7 +88,7 @@ let open = reactive({
    
     <nav class="relative lg:block hidden">
       <ul class="flex items-center justify-center list-none space-x-6 w-full  xl:text-lg text-sm  " >
-        <li class="py-4"><router-link :to="{name:'home'}" class="cursor-pointer p-2 rounded-lg text-left font-semibold text-gray-500 hover:bg-red-500 hover:text-white">Acceuil</router-link></li>
+        <li class="py-4"><router-link :to="{name:'home'}" class="cursor-pointer p-2 rounded-lg text-left font-semibold text-gray-500 hover:bg-red-500 hover:text-white">Accueil</router-link></li>
         <li class="relative group py-4">
           <div class="cursor-pointer p-2 rounded-lg text-left font-semibold flex items-center  text-gray-500 group-hover:bg-red-500 group-hover:text-white">
             <span>Publications</span>  
@@ -182,7 +182,7 @@ let open = reactive({
           <input type="text" class="w-full py-2 pl-10 pr-4 text-gray-700 bg-white border rounded-lg  focus:border-red-400 text-sm  focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-red-300" placeholder="Search">
       </div>
       <ul class="flex items-start flex-col justify-start py-4 list-none w-full text-sm" >
-        <li @click="open.menu =!open.menu" class="py-1 px-6 w-full"><router-link :to="{name:'home'}" class="cursor-pointer p-2  text-left block font-semibold text-gray-500 hover:bg-red-500 focus:bg-red-500 w-full hover:text-white">Acceuil</router-link></li>
+        <li @click="open.menu =!open.menu" class="py-1 px-6 w-full"><router-link :to="{name:'home'}" class="cursor-pointer p-2  text-left block font-semibold text-gray-500 hover:bg-red-500 focus:bg-red-500 w-full hover:text-white">Accueil</router-link></li>
         <li class="relative py-1 px-6 w-full">
           <div @click="open.submenu.publication = !open.submenu.publication" class="cursor-pointer p-2 text-left font-semibold flex justify-between w-full items-center  text-gray-500 hover:bg-red-500 hover:text-white">
             <span>Publications</span>  

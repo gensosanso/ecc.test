@@ -123,7 +123,7 @@ class UserController extends Controller
     /**
      * Toggle user blocked status.
      */
-    public function toogleBlocked(User $user)
+    public function toggleBlocked(User $user)
     {
         $user->blocked = !$user->blocked;
         $user->save();

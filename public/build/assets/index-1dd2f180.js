@@ -1,1 +1,0 @@
-import{u as s,N as r}from"./app-2c444acf.js";const t=s(),o="",a=t.tokenUser?t.tokenUser:o,n=r.create({baseURL:"/api"}),i=r.create({baseURL:"/api"});n.interceptors.request.use(e=>(e.headers.Authorization=`Bearer ${a}`,e));i.interceptors.request.use(e=>(e.headers.Authorization=`Bearer ${a}`,e.headers["Content-Type"]="multipart/form-data",e));export{n as a};

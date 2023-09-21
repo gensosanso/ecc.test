@@ -30,7 +30,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
     Route::controller(UserController::class)->group(function () {
         Route::put("/users/confirmed/{user}", 'confirmed');
-        Route::put("/users/toogle-blocked/{user}", 'toogleBlocked');
+        Route::put("/users/toggle-blocked/{user}", 'toggleBlocked');
         Route::put("/users-update/{user}", 'update2');
         // Route::post('/api/users/{user}', 'update2')->name('api.users.update');
     });

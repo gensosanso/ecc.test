@@ -145,7 +145,7 @@ export default function useUsers() {
 
         onConfirm(async () => {
             try {
-                await axiosClient.put(`/users/toogle-blocked/${id}`);
+                await axiosClient.put(`/users/toggle-blocked/${id}`);
                 getUsers();
             } catch (e) {
                 handleErrors(e);
