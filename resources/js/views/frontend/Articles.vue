@@ -23,6 +23,7 @@ const data = [
   },
   
   ];
+ 
 </script>
 <template>
     <div class="w-full min-h-screen bg-white">
@@ -170,7 +171,7 @@ const data = [
                   </div>
 
                   <!-- Corps -->
-                  <div class="flex flex-col items-start w-5/6 h-auto bg-white p-6">
+                  <div class="flex flex-col  w-5/6 h-auto bg-white p-6">
                     <!-- Themes -->
                     <div class="flex items-center w-full">
                       <h1 class="font-bold text-3xl text-zinc-800 tracking-tight my-6">Themes</h1>
@@ -181,32 +182,72 @@ const data = [
                         <option >Evenement</option>
                         <option >Tout</option>
                       </select>
+                      
+                    </div>
+                    <div class="flow-root">
+                      <router-link
+                                :to="{
+                                    name: 'create.messages',
+                                }"
+                            >
+                              <button class="bg-blue-500 float-right mt-4 hover:bg-blue-700 text-white font-bold py-2  px-4 rounded ">
+                              Ajouter un message
+                              </button>
+                      </router-link>
                     </div>
 
                     <!-- Sous-themes -->
                     <h1 class="font-semibold text-xl text-zinc-800 tracking-tight my-6">Choisissez les sous-themes</h1>
                     <div class="bg-gray-100 w-xl grid grid-cols-1  md:grid-cols-4 gap-3 md:gap-4 p-4 ">
                       <StCard v-for="d,index in data" :key="index" :data="d"/>
-                  </div>
+                    </div>
+                   
+                    
+                   
+                    
 
                   <!-- Cartes -->
                   <div class="w-full grid grid-cols-1  sm:grid-cols-3 md:grid-cols-4 gap-5 my-20">
 
-                <div class="cursor-pointer w-auto h-auto block">
-                  <div class="bg-white rounded-xl max-w-[360px] p-6 shadow-md">
-                    <p class="text-sm tracking-wide text-left font-medium text-zinc-700">" Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, vel unde corporis iste recusandae rem quis! Placeat asperiores nostrum eos mollitia officiis iste dignissimos! Reprehenderit beatae dignissimos laborum officia odio. "</p>
-                    <div class="w-full flex items-center  mt-2.5">
-                    <div class="w-10 h-10 mx-2 mt-0 bg-slate-400 rounded-full"></div>
-                    <div class="block">
-                      <p class="font-medium text-sm text-zinc-800">Glory to the lord</p>
-                      <p class="text-grey-100 text-xs">Pete Davidson</p>
+                  <div class="cursor-pointer w-auto h-auto block">
+                    <div class="bg-white rounded-xl max-w-[360px] p-6 shadow-md">
+                      <p class="text-sm tracking-wide text-left font-medium text-zinc-700">" Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, vel unde corporis iste recusandae rem quis! Placeat asperiores nostrum eos mollitia officiis iste dignissimos! Reprehenderit beatae dignissimos laborum officia odio. "</p>
+                      <div class="w-full flex items-center  mt-2.5">
+                        <div class="w-10 h-10 mx-2 mt-0 bg-slate-400 rounded-full"></div>
+
+                          <div class="block">
+                            <p class="font-medium text-sm text-zinc-800">Glory to the lord</p>
+                            <p class="text-grey-100 text-xs">Pete Davidson</p>
+                          
+                          </div>
+
+                      </div>
+                      <div class="w-full mt-3">
+                        <router-link
+                                :to="{
+                                    name: 'edit.messages',
+                                }"
+                            >
+                          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded right-4">
+                          editer
+                          </button>
+                        </router-link>
+                       
+                            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 mx-2 px-4 rounded right-4" onclick="">
+                              supprimer
+                            </button>
+                       
+                      </div>
+                  
                     </div>
+                    
+                    <!-- <button class="bg-blue-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded absolute bottom-4 right-4">
+                      supprimer
+                    </button> -->
+
+
                   </div>
-                  </div>
-
-
-                </div>
-
+                
                   </div>
                   </div>
                 </div>

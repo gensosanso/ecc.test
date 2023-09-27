@@ -78,6 +78,6 @@ const titre = ref("Contactez-nous !");
 
         <div class="w-[92%] h-[480px] mx-auto bg-green-200 rounded-lg mt-10"></div>
 
-        </div>
+     </div>
 
 </template>

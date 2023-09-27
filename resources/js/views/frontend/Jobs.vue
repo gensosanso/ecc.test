@@ -84,7 +84,11 @@ const data =[
         </button>
         </div>
         </div>
-
+        <div class="flow-root mx-4">
+            <button class="bg-blue-500 float-right mt-4 hover:bg-blue-700 text-white font-bold py-2  px-4 rounded ">
+             Ajouter un job
+            </button>
+        </div>
         <!-- Body section -->
         <div class="flex items-start w-full h-auto mt-8">
             <div class="flex flex-col w-1/5 h-auto bg-white p-6">

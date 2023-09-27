@@ -82,165 +82,181 @@ const data = [
                 </div>
                 <div class="mx-auto w-full max-w-md rounded-2xl bg-white">
 
-<Disclosure v-slot="{ open }">
-  <DisclosureButton
-    class="flex w-full justify-between rounded-lg bg-blue-50 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-100 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75"
-  >
-    <span>Continent</span>
-    <ChevronUpIcon
-      :class="open ? 'rotate-180 transform' : ''"
-      class="h-5 w-5 text-blue-500"
-    />
-  </DisclosureButton>
-  <DisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-500">
-      <div class="flex items-center">
-                      <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
-                      <label for="yes">Artiste Chantre</label>
-                  </div>
-  
-                  <div class="flex items-center">
-                          <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="no"   :value="false">
-                      <label for="no">Chorale</label>
-                  </div>
-                  <div class="flex items-center">
-                      <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
-                      <label for="yes">Cours biblique</label>
-                  </div>
-  
-                  <div class="flex items-center">
-                          <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="no"   :value="false">
-                      <label for="no">Chargé paroissial</label>
-                  </div>
+        <Disclosure v-slot="{ open }">
+        <DisclosureButton
+            class="flex w-full justify-between rounded-lg bg-blue-50 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-100 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75"
+        >
+            <span>Continent</span>
+            <ChevronUpIcon
+            :class="open ? 'rotate-180 transform' : ''"
+            class="h-5 w-5 text-blue-500"
+            />
+        </DisclosureButton>
+        <DisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-500">
+            <div class="flex items-center">
+                            <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
+                            <label for="yes">Artiste Chantre</label>
+                        </div>
+        
+                        <div class="flex items-center">
+                                <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="no"   :value="false">
+                            <label for="no">Chorale</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
+                            <label for="yes">Cours biblique</label>
+                        </div>
+        
+                        <div class="flex items-center">
+                                <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="no"   :value="false">
+                            <label for="no">Chargé paroissial</label>
+                        </div>
 
-                  <div class="flex items-center">
-                      <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
-                      <label for="yes">Déchaussé</label>
-                  </div>
-  
-                  <div class="flex items-center">
-                          <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="no"   :value="false">
-                      <label for="no">Evangelisation</label>
-                  </div>
-                  <div class="flex items-center">
-                      <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
-                      <label for="yes">Fidele</label>
-                  </div>
-  </DisclosurePanel>
-</Disclosure>
+                        <div class="flex items-center">
+                            <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
+                            <label for="yes">Déchaussé</label>
+                        </div>
+        
+                        <div class="flex items-center">
+                                <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="no"   :value="false">
+                            <label for="no">Evangelisation</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
+                            <label for="yes">Fidele</label>
+                        </div>
+        </DisclosurePanel>
+        </Disclosure>
 
-<Disclosure as="div" class="mt-2" v-slot="{ open }">
-  <DisclosureButton
-    class="flex w-full justify-between rounded-lg bg-blue-50 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-100 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75">
-    <span>Pays</span>
-    <ChevronUpIcon
-      :class="open ? 'rotate-180 transform' : ''"
-      class="h-5 w-5 text-blue-500"
-    />
-  </DisclosureButton>
-  <DisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-500">
-      <div class="flex items-center">
-                      <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
-                      <label for="yes">Artiste Chantre</label>
-                  </div>
-  
-                  <div class="flex items-center">
-                          <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="no"   :value="false">
-                      <label for="no">Chorale</label>
-                  </div>
-                  <div class="flex items-center">
-                      <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
-                      <label for="yes">Cours biblique</label>
-                  </div>
-  
-                  <div class="flex items-center">
-                          <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="no"   :value="false">
-                      <label for="no">Chargé paroissial</label>
-                  </div>
+        <Disclosure as="div" class="mt-2" v-slot="{ open }">
+        <DisclosureButton
+            class="flex w-full justify-between rounded-lg bg-blue-50 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-100 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75">
+            <span>Pays</span>
+            <ChevronUpIcon
+            :class="open ? 'rotate-180 transform' : ''"
+            class="h-5 w-5 text-blue-500"
+            />
+        </DisclosureButton>
+        <DisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-500">
+            <div class="flex items-center">
+                            <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
+                            <label for="yes">Artiste Chantre</label>
+                        </div>
+        
+                        <div class="flex items-center">
+                                <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="no"   :value="false">
+                            <label for="no">Chorale</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
+                            <label for="yes">Cours biblique</label>
+                        </div>
+        
+                        <div class="flex items-center">
+                                <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="no"   :value="false">
+                            <label for="no">Chargé paroissial</label>
+                        </div>
 
-                  <div class="flex items-center">
-                      <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
-                      <label for="yes">Déchaussé</label>
-                  </div>
-  </DisclosurePanel>
-</Disclosure>
+                        <div class="flex items-center">
+                            <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
+                            <label for="yes">Déchaussé</label>
+                        </div>
+        </DisclosurePanel>
+        </Disclosure>
 
-<Disclosure as="div" class="mt-2" v-slot="{ open }">
-<DisclosureButton
-  class="flex w-full justify-between rounded-lg bg-blue-50 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-100 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75">
-  <span>Villes</span>
-  <ChevronUpIcon
-    :class="open ? 'rotate-180 transform' : ''"
-    class="h-5 w-5 text-blue-500"
-  />
-</DisclosureButton>
-<DisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-500">
-    <div class="flex items-center">
-                    <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
-                    <label for="yes">Artiste Chantre</label>
-                </div>
+        <Disclosure as="div" class="mt-2" v-slot="{ open }">
+                <DisclosureButton
+                class="flex w-full justify-between rounded-lg bg-blue-50 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-100 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75">
+                <span>Villes</span>
+                <ChevronUpIcon
+                    :class="open ? 'rotate-180 transform' : ''"
+                    class="h-5 w-5 text-blue-500"
+                />
+                </DisclosureButton>
+                <DisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-500">
+                    <div class="flex items-center">
+                                    <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
+                                    <label for="yes">Artiste Chantre</label>
+                                </div>
 
-                <div class="flex items-center">
-                        <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="no"   :value="false">
-                    <label for="no">Chorale</label>
-                </div>
-                <div class="flex items-center">
-                    <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
-                    <label for="yes">Cours biblique</label>
-                </div>
+                                <div class="flex items-center">
+                                        <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="no"   :value="false">
+                                    <label for="no">Chorale</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
+                                    <label for="yes">Cours biblique</label>
+                                </div>
 
-                <div class="flex items-center">
-                        <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="no"   :value="false">
-                    <label for="no">Chargé paroissial</label>
-                </div>
+                                <div class="flex items-center">
+                                        <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="no"   :value="false">
+                                    <label for="no">Chargé paroissial</label>
+                                </div>
 
-                <div class="flex items-center">
-                    <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
-                    <label for="yes">Déchaussé</label>
-                </div>
-          </DisclosurePanel>
-  </Disclosure>
+                                <div class="flex items-center">
+                                    <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
+                                    <label for="yes">Déchaussé</label>
+                                </div>
+                </DisclosurePanel>
+        </Disclosure>
 
-  <Disclosure as="div" class="mt-2" v-slot="{ open }">
-<DisclosureButton
-  class="flex w-full justify-between rounded-lg bg-blue-50 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-100 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75">
-  <span>Nombres de fideles</span>
-  <ChevronUpIcon
-    :class="open ? 'rotate-180 transform' : ''"
-    class="h-5 w-5 text-blue-500"
-  />
-</DisclosureButton>
-<DisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-500">
-    <div class="flex items-center">
-                    <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
-                    <label for="yes">Artiste Chantre</label>
-                </div>
+        <Disclosure as="div" class="mt-2" v-slot="{ open }">
+                <DisclosureButton
+                class="flex w-full justify-between rounded-lg bg-blue-50 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-100 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75">
+                <span>Nombres de fideles</span>
+                <ChevronUpIcon
+                    :class="open ? 'rotate-180 transform' : ''"
+                    class="h-5 w-5 text-blue-500"
+                />
+                </DisclosureButton>
+                <DisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-500">
+                    <div class="flex items-center">
+                                    <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
+                                    <label for="yes">Artiste Chantre</label>
+                                </div>
 
-                <div class="flex items-center">
-                        <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="no"   :value="false">
-                    <label for="no">Chorale</label>
-                </div>
-                <div class="flex items-center">
-                    <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
-                    <label for="yes">Cours biblique</label>
-                </div>
+                                <div class="flex items-center">
+                                        <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="no"   :value="false">
+                                    <label for="no">Chorale</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
+                                    <label for="yes">Cours biblique</label>
+                                </div>
 
-                <div class="flex items-center">
-                        <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="no"   :value="false">
-                    <label for="no">Chargé paroissial</label>
-                </div>
+                                <div class="flex items-center">
+                                        <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="no"   :value="false">
+                                    <label for="no">Chargé paroissial</label>
+                                </div>
 
-                <div class="flex items-center">
-                    <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
-                    <label for="yes">Déchaussé</label>
-                </div>
-          </DisclosurePanel>
-  </Disclosure>
-                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" class="form-checkbox border-gray-300 mr-2" id="yes"  :value="true">
+                                    <label for="yes">Déchaussé</label>
+                                </div>
+                </DisclosurePanel>
+        </Disclosure>
+    </div>
             </div>
-
+            
             <!-- Cartes -->
             <div class="flex flex-col items-start w-5/6 h-auto bg-white p-6">
-                <h1 class="font-bold text-3xl text-zinc-800 tracking-tight mb-4">Evenements en cours</h1>
+                <div class="flex-col w-full">
+                   
+                    <div class="flex justify-end">
+                      <router-link
+                                :to="{
+                                    name: 'create.event',
+                                }"
+                            >
+                              <button class="bg-blue-500 float-right mt-4 hover:bg-blue-700 text-white font-bold py-2  px-4 rounded ">
+                              Ajouter un Evenement
+                              </button>
+                      </router-link>
+                    </div>
+                    <div class="flex justify-start mb-4">
+                        <h1 class="font-bold text-3xl text-zinc-800 tracking-tight mb-4">Evenements en cours</h1>
+                    </div>
+                </div>
                 <div class="w-full px-3 h-auto flex items-center justify-between mb-3 ">
         <div class="flex flex-col md:flex-row items-center justify-start w-1/2  md:my-4 py-2">
           <button class="flex items-center justify-center border-none md:mr-1  h-10 w-36 md:w-12 bg-white">

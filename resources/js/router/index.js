@@ -107,6 +107,33 @@ const router = createRouter({
       },
     },
     {
+      path: '/Messages/Create',
+      name: 'create.messages',
+      components: {
+        default:() => import('@/views/frontend/message/MessageCreate.vue'),
+        header: Header,
+        footer: Footer,
+      },
+      meta: {
+        title: SITE_NAME + " - Messages",
+      },
+    },
+    
+    {
+      path: '/Messages/Edit',
+      name: 'edit.messages',
+      components: {
+        default:() => import('@/views/frontend/message/MessageEdit.vue'),
+        header: Header,
+        footer: Footer,
+      },
+      meta: {
+        title: SITE_NAME + " - Messages edit",
+      },
+    },
+    
+
+    {
       path: '/Messages',
       name: 'messages',
       components: {
@@ -116,6 +143,18 @@ const router = createRouter({
       },
       meta: {
         title: SITE_NAME + " - Messages",
+      },
+    },
+    {
+      path: '/Events/Create',
+      name: 'create.event',
+      components: {
+        default:() => import('@/views/frontend/event/EventCreate.vue'),
+        header: Header,
+        footer: Footer,
+      },
+      meta: {
+        title: SITE_NAME + " - Evenements",
       },
     },
     {

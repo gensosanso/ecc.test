@@ -15,8 +15,16 @@
                     <div class="flex mx-1 w-[20%]">
                         <span class="py-2 px-3 max-w-52 rounded-xl bg-white text-zinc-600 font-semibold text-md shadow">{{ data.exp }}</span>
                     </div>
-                    <h3 class="font-medium text-zinc-800 mx-1 w-[25%]">{{ data.location }}</h3>
-                    <h3 class="font-medium text-zinc-500 mx-2 text-right">{{ data.publishedAt }}</h3>
+                    <h3 class="font-medium text-zinc-800 mx-1 ">{{ data.location }}</h3>
+                    <h3 class="font-medium text-zinc-500 mx-3 text-right">{{ data.publishedAt }}</h3>
+                    <div class="flex flex-row">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded right-4">
+                        editer
+                        </button>
+                        <button class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 mx-2 px-4 rounded right-4">
+                       supprimer
+                        </button>
+                      </div>
                 </div>
 </template>
 <script setup>
