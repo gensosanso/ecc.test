@@ -7,11 +7,13 @@
     "dependencies": {
         "@amcharts/amcharts5": "^5.4.7",
         "@amcharts/amcharts5-geodata": "^5.1.1",
+        "@braid/vue-formulate": "^2.5.3",
         "@headlessui/vue": "^1.7.10",
         "@heroicons/vue": "^2.0.14",
         "country-flag-emoji-polyfill": "^0.1.4",
         "pinia": "^2.0.30",
         "vue": "^3.2.41",
+        "vue-form-generator": "^2.3.4",
         "vue-router": "^4.1.5",
         "vue3-easy-data-table": "^1.5.30",
         "vuejs-confirm-dialog": "^0.3.6"

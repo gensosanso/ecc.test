@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('countries', function (Blueprint $table) {
-            $table->unsignedBigInteger('zone_id');
-         
-            $table->foreign('zone_id')->references('id')->on('zones');
+        Schema::create('subthemes', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->unsignedBigInteger('theme_id');
+
+            $table->foreign('theme_id')->references('id')->on('themes')->onDelete('cascade');
+
+            $table->timestamps();
         });
     }
 
@@ -23,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('subthemes');
     }
 };

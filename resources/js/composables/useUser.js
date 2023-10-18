@@ -182,7 +182,6 @@ export default function useUsers() {
         confirmedUser,
         toggleBlocked,
         getUserType,
-
         updateUser
     };
 }

@@ -47,6 +47,17 @@ class UserController extends Controller
         return UserResource::collection($users);
     }
 
+     /**
+     * Get users by type.
+     */
+    public function getById(string $id, Request $request)
+    {
+        $officialParish = intval($request->officialParish);
+        $users = User::where('user_id', $id)
+            ->get();
+        return UserResource::collection($users);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -148,6 +159,14 @@ class UserController extends Controller
         ]);
 
         return new UserResource($user);
+    }
+
+    public function getUserType($id)
+    {
+        $user = User::findOrFail($id);
+        $userType = $user->user_type;
+        
+        return response()->json(['user_type' => $userType]);
     }
 
 

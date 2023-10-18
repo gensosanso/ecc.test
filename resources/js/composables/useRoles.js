@@ -20,7 +20,7 @@ export default function useRoles() {
         errors.value = [];
         loading.value = true;
         await axiosClient
-            .get(`/users-permissions/roles`)
+            .get(`/users/{id}/user_type`)
             .then((response) => {
                 roles.value = response.data.roles;
             })

@@ -428,6 +428,32 @@ const router = createRouter({
                 title: SITE_NAME + " - Edit User",
             },
         },
+        {
+          path: "messages",
+          component: () => import("@/views/backend/message/MessageIndex.vue"),
+          name: "admin.message.index",
+          meta: {
+            title: SITE_NAME + " - Admin Panel | Messages",
+          },
+        },
+
+        {
+            path: "message/create",
+            component: () => import("@/views/backend/message/MessageCreate.vue"),
+            name: "admin.message.create",
+            meta: {
+                title: SITE_NAME + " - Create Message",
+            },
+        },
+        {
+            path: "message/edit/:id",
+            component: () => import("@/views/backend/message/MessageEdit.vue"),
+            props: true,
+            name: "admin.message.edit",
+            meta: {
+                title: SITE_NAME + " - Edit message",
+            },
+        },
       ]
     },
 

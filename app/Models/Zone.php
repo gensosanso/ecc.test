@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Zoned extends Model
+class Zone extends Model
 {
     use HasFactory;
 
@@ -13,7 +13,8 @@ class Zoned extends Model
         'name_fr',
         'name_en',
         'name_es',
-        'continent_id',
+        'name_pt',
+        'continent_id'
     ];
 
     public function continent()

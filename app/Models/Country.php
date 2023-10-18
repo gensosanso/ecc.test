@@ -10,15 +10,17 @@ class Country extends Model
     use HasFactory;
 
     protected $fillable = [
+        'code_iso',
         'name_fr',
         'name_en',
         'name_es',
-        'zoned_id',
+        'name_pt',
+        'zone_id'
     ];
 
-    public function zoned()
+    public function zone()
     {
-        return $this->belongsTo(Zoned::class);
+        return $this->belongsTo(zone::class);
     }
 
     public function cities()

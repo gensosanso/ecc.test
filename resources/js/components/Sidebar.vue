@@ -44,10 +44,10 @@
                         <h3 class="font-semibold text-lg">Dashboard</h3>
                     </router-link>
 
-                    <div class="flex items-center w-full p-2  my-2 rounded-lg space-x-2 hover:bg-white hover:text-black text-white group cursor-pointer">
+                    <router-link :to="{name:'admin.message.index'}" class="flex items-center w-full p-2  my-2 rounded-lg space-x-2 hover:bg-white hover:text-black text-white group cursor-pointer">
                         <NewspaperIcon class="w-6 h-6" />
                         <h3 class="font-semibold text-lg ">Publication</h3>
-                    </div>
+                    </router-link>
 
                     <router-link :to="{name:'admin.user.index'}" class="flex items-center w-full p-2  my-2 rounded-lg hover:bg-white space-x-2 hover:text-black text-white group cursor-pointer">
                         <UserGroupIcon class="w-6 h-6" />

@@ -6,7 +6,8 @@ use App\Http\Controllers\Api\ContinentController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\DepartmentController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Api\ZonedController;
+use App\Http\Controllers\Api\MessageController;
+use App\Http\Controllers\Api\zoneController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,7 @@ Route::post("/login", [AuthenticateController::class, 'login']);
 Route::post("/login-admin", [AuthenticateController::class, 'loginAdmin']);
 
 Route::get("/continents", [ContinentController::class, 'index']);
-Route::get("/zoneds", [ZonedController::class, 'index']);
+Route::get("/zones", [zoneController::class, 'index']);
 Route::get("/countries", [CountryController::class, 'index']);
 Route::get("/cities", [CityController::class, 'index']);
 Route::get("/departments", [DepartmentController::class, 'index']);
@@ -32,8 +33,10 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         Route::put("/users/confirmed/{user}", 'confirmed');
         Route::put("/users/toggle-blocked/{user}", 'toggleBlocked');
         Route::put("/users-update/{user}", 'update2');
+        
         // Route::post('/api/users/{user}', 'update2')->name('api.users.update');
     });
+    Route::get('/users/{id}/user_type', [UserController::class, 'getUserType'])->name('users.user_type');
 
     Route::controller(ContinentController::class)->group(function () {
         Route::post("/continents", 'store');
@@ -42,11 +45,12 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         Route::delete("/continents/{continent}", 'destroy');
     });
 
-    Route::controller(ZonedController::class)->group(function () {
-        Route::post("/zoneds", 'store');
-        Route::get("/zoneds/{zoned}", 'show');
-        Route::put("/zoneds/{zoned}", 'update');
-        Route::delete("/zoneds/{zoned}", 'destroy');
+    Route::controller(zoneController::class)->group(function () {
+        Route::post("/zones", 'store');
+        Route::get("/zones/{zone}", 'show');
+        Route::put("/zones/{zone}", 'update');
+        Route::delete("/zones/{zone}", 'destroy');
+        Route::get('/zones/{continent_id}', [ZoneController::class, 'getByContinent']);
     });
 
     Route::controller(CountryController::class)->group(function () {
@@ -54,6 +58,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         Route::get("/countries/{country}", 'show');
         Route::put("/countries/{country}", 'update');
         Route::delete("/countries/{country}", 'destroy');
+        Route::get('/countries/{zone_id}', [CountryController::class, 'getByZone']);
     });
 
     Route::controller(CityController::class)->group(function () {
@@ -69,4 +74,19 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         Route::put("/departments/{department}", 'update');
         Route::delete("/departments/{department}", 'destroy');
     });
+
+  
 });
+
+// les routes du controleur message
+Route::get('/allMessages', [MessageController::class, 'getAllMessages']);
+Route::get('/messages/order-by-date', [MessageController::class, 'orderByDate']);
+Route::get('/messages/{id}/owner', [MessageController::class, 'getMessageOwner']);
+Route::get('/messages/theme/{themeId}', [MessageController::class, 'getMessagesByTheme']);
+Route::get('/messages/subtheme/{subthemeId}', [MessageController::class, 'getMessagesBySubtheme']);
+Route::get('/messages/{id}', [MessageController::class, 'getMessageAttributes']);
+Route::post('/messages', [MessageController::class, 'createMessage']);
+Route::post('/messages/filter', [MessageController::class, 'filterMessages']);
+Route::put('/messages/{id}', [MessageController::class, 'updateMessage']);
+Route::delete('/messages/{id}', [MessageController::class, 'deleteMessage']);
+Route::put('/messages/{id}/status/{status}', [MessageController::class, 'changeStatus']);

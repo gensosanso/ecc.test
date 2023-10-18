@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('zoneds', function (Blueprint $table) {
-            $table->unsignedBigInteger('continent_id');
-         
-            $table->foreign('continent_id')->references('id')->on('continents');
+        Schema::create('zones', function (Blueprint $table) {
+            $table->id();
+            $table->string('name_fr');
+            $table->string('name_en')->nullable();
+            $table->string('name_es')->nullable();
+            $table->string('name_pt')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('zones');
     }
 };

@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('website')->nullable();
             $table->string('youtube')->nullable();
             $table->foreignId('continent_id')->nullable()->constrained('continents')->nullOnDelete();
-            $table->foreignId('zoned_id')->nullable()->constrained('zoneds')->nullOnDelete();
+            $table->foreignId('zone_id')->nullable()->constrained('zones')->nullOnDelete();
             $table->foreignId('country_id')->nullable()->constrained('countries')->nullOnDelete();
             $table->foreignId('city_id')->nullable()->constrained('cities')->nullOnDelete();
             $table->foreignId('department_id')->nullable()->constrained('departments')->nullOnDelete();

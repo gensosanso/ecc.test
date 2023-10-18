@@ -1,70 +1,59 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HeadBanner from '@/components/HeadBanner.vue';
-import { ref } from "vue";
-const titre = ref("Contactez-nous !");
-</script>
 <template>
-    <div class="w-full min-h-screen bg-white m-4 p-4">
-     <HeadBanner titre="Editer un message !"/>
-         
-         <div class="flex items-center justify-center w-full min-h-screen p-3 bg-white">
-            <div class="flex flex-col items-center justify-center w-1/2 p-4 h-auto bg-slate-100 rounded-lg shadow">
-            
+    <div class="relative min-h-screen w-full bg-white xl:mt-0 xl:p-4">
+        <div class="z-0 w-full p-4"> <h1>Creer un article</h1>
 
-            
-                <form @submit.prevent="submitForm">
-            <div>
+            <section class="mx-auto w-full bg-white p-6">
+               
+
+                <form class="flex flex-col w-full py-3 px-4" @submit.prevent="">
+                    <div>
                 <label for="titre">Titre:</label>
                 <input type="text" id="titre" v-model="formulaire.titre" required>
             </div>
+
             <div>
                 <label for="contenu">Contenu:</label>
                 <textarea id="contenu" v-model="formulaire.contenu" required></textarea>
             </div>
+
             <div>
                 <label for="image">Image:</label>
                 <input type="file" id="image" v-on:change="onFileChange" accept="image/*">
             </div>
-            <div>
-                <label for="continent">Continent:</label>
-                    <select v-model="selectedContinent">
-                    <option v-for="continent in continents" :value="continent.id" :key="continent.id">{{ continent.name_fr }}</option>
-                    </select>
 
-                    <label for="zone" v-if="selectedContinent">Zone:</label>
-                    <select v-model="selectedZone" v-if="selectedContinent">
-                    <option v-for="zone in filteredZones" :value="zone.id" :key="zone.id">{{ zone.name_fr }}</option>
-                    </select>
-
-                    <label for="country" v-if="selectedZone">Pays:</label>
-                    <select v-model="selectedCountry" v-if="selectedZone">
-                    <option v-for="country in filteredCountries" :value="country.id" :key="country.id">{{ country.name_fr }}</option>
-                    </select>
-            </div>
             <div>
                 <label for="theme">Thème:</label>
                 <input type="text" id="theme" v-model="formulaire.theme" required>
             </div>
+
             <div>
                 <label for="sousTheme">Sous-thème:</label>
                 <input type="text" id="sousTheme" v-model="formulaire.sousTheme" required>
             </div>
-           
+
+            <div>
+                <label for="tag">Tag associé:</label>
+                <input type="text" id="tag" v-model="formulaire.tag" required>
+            </div>
+
             <div>
                 <button type="submit">Soumettre</button>
             </div>
-        </form>
-         </div>
-         
-         </div>
-        
- 
+                   
+                </form>
+            </section>
+        </div>
     </div>
-     
- 
- </template>
- <script>
+</template>
+
+<script>
+import { ref } from 'vue';
+import useAuth from '@/composables/useAuth';
+import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/24/solid";
+
+const showPassword = ref(false);
+const { errors, loading, createUser1, isFinish, cleanErrors, } = useAuth();
+
 export default {
     data() {
         return {
@@ -103,8 +92,9 @@ export default {
         }
     }
 };
-</script>
 
+
+</script>
 <style scoped>
 /* Styles spécifiques au composant Message.vue */
 h1 {

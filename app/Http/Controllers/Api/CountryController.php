@@ -3,49 +3,89 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CountryRequest;
+use App\Http\Resources\CountryResource;
 use App\Models\Country;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class CountryController extends Controller
 {
     /**
      * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function index(): Response
+    public function index()
     {
-        //
+        $countries = Country::latest()->get();
+        return CountryResource::collection($countries);
+
+        // if($lang == 'pt'){
+        //     return CountryResource::collection(Country::orderBy('name_pt', 'asc')->get());
+        // }elseif ($lang == 'es') {
+        //     return CountryResource::collection(Country::orderBy('name_es', 'asc')->get());
+        // }elseif ($lang == 'en') {
+        //     return CountryResource::collection(Country::orderBy('name_en', 'asc')->get());
+        // }else {
+        //     return CountryResource::collection(Country::orderBy('name_fr', 'asc')->get());
+        // }
     }
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request): Response
+    public function store(CountryRequest $request)
     {
-        //
+        $country = Country::create($request->validated());
+
+        return new CountryResource($country);
     }
 
     /**
      * Display the specified resource.
+     *
+     * @param  \App\Models\Country  $country
+     * @return \Illuminate\Http\Response
      */
-    public function show(Country $country): Response
+    public function show(Country $country)
     {
-        //
+        return new CountryResource($country);
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Country  $country
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Country $country): Response
+    public function update(CountryRequest $request, Country $country)
     {
-        //
+        $country->update($request->validated());
+
+        return new CountryResource($country);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Country $country): Response
+    public function getByZone(Request $request)
     {
-        //
+        $zoneId = $request->input('zone_id');
+        
+        $countries = Country::where('zone_id', $zoneId)->get();
+        
+        return response()->json($countries);
+    }
+
+
+    public function destroy($countries)
+    {
+        $countries = json_decode($countries);
+        foreach ($countries as  $country) {
+            Country::where('id', $country)->delete();
+        }
+
+        return response()->noContent();
     }
 }

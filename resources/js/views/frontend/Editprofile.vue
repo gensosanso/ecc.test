@@ -4,9 +4,13 @@ import { onMounted, reactive, ref } from 'vue';
 import useRoles from '@/composables/useRoles';
 import useAuth from '@/composables/useAuth';
 import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/24/solid"
+import Formtest from '@/components/Formtest.vue'
+// import Formgdp from '@/components/Formgdp.vue'
+
+
 
 const showPassword = ref(false);
-const { getRoles, roles, } = useRoles();
+//const { getRoles, roles, } = useRoles();
 const { errors, loading } = useAuth();
 const user = reactive({
     username: 'Sigha',
@@ -16,10 +20,20 @@ const user = reactive({
     parishOfficial: 1,
     role: 1
 })
+const roles = [
+    {name:'fidele'}, 
+    {name:'siege'}, 
+    {name:'diocese'}, 
+    {name:'charge paroissial'}, 
+    {name:'groupe de priere'}];
 
 onMounted(async () => {
-    await getRoles();
+   // await getRoles();
+   console.log(roles)
+   console.log(roles.name)
+   console.log(user.username)
 });
+
 
 </script>
 <template>
@@ -28,7 +42,7 @@ onMounted(async () => {
             <div class="relative w-36 h-36 rounded-full overflow-clip shadow">
                     <img src="/assets/bdt.jpg" class="relative w-full h-full object-cover"/>
                     <div class="absolute w-6 h-6 rounded-full bg-gray-400"></div>
-                </div>
+            </div>
 
                 <form class="flex flex-col w-full py-3 px-4">
 
@@ -48,9 +62,9 @@ onMounted(async () => {
                     </div>
                     <div class="w-full mt-3">
                         <label class="">Type de profil</label>
-                        <select v-model="user.role" class="form-select p-2 outline-none mt-1 border block border-gray-300 rounded-lg shadow-sm w-full">
+                        <select v-model="roles.name" class="form-select p-2 outline-none mt-1 border block border-gray-300 rounded-lg shadow-sm w-full">
                             <template v-for="role in roles"  :key="role.id">
-                                <option v-if="role.name != 'Public' && role.name != 'Admin'" :value="role.id">{{ role.name }}</option>
+                                <option v-if="role.name != 'Public' && role.name != 'Admin'" :value="roles.name">{{ role.name }}</option>
                             </template>
                         </select>
                     </div>
@@ -69,6 +83,37 @@ onMounted(async () => {
                     </div>
                     <input class="p-2 mt-8 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold cursor-pointer" type="submit" value="Modifier"/>
                 </form>
+         </div>
+         
+    </div>
+    <hr class="my-4">
+    
+    <div class="flex items-center justify-center w-full min-h-screen p-3 bg-white">
+        
+        <div class="flex flex-col items-center justify-center w-1/2 p-4 h-auto bg-slate-100 rounded-lg shadow">
+            <h1>INFORMATIONS SUPPLEMENTAIRES</h1>
+            <form class="flex flex-col w-full py-3 px-4 border-none" v-if="roles.name === 'fidele'">
+                <Formtest />
+                <input class="p-2 mt-8 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold cursor-pointer" type="submit" value="Enregistrer"/>
+            </form>
+            <form class="flex flex-col w-full py-3 px-4 border-none" v-if="roles.name === 'siege'">
+                <Formtest />
+                <input class="p-2 mt-8 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold cursor-pointer" type="submit" value="Enregistrer"/>
+            </form>
+            <form class="flex flex-col w-full py-3 px-4 border-none" v-if="roles.name === 'diocese'">
+                <Formtest />
+                <input class="p-2 mt-8 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold cursor-pointer" type="submit" value="Enregistrer"/>
+            </form>
+            <form class="flex flex-col w-full py-3 px-4 border-none" v-if="roles.name === 'charge paroissial'">
+                <Formtest />
+                <input class="p-2 mt-8 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold cursor-pointer" type="submit" value="Enregistrer"/>
+            </form>
+            <form class="flex flex-col w-full py-3 px-4 border-none" v-if="roles.name === 'groupe de priere'">
+                <!-- <Formgdp /> -->
+                <input class="p-2 mt-8 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold cursor-pointer" type="submit" value="Enregistrer"/>
+            </form>
+
         </div>
     </div>
+   
 </template>

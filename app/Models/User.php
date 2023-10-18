@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable 
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -35,7 +35,7 @@ class User extends Authenticatable
         'website',
         'youtube',
         'continent_id',
-        'zoned_id',
+        'zone_id',
         'country_id',
         'city_id',
         'department_id',
@@ -65,8 +65,8 @@ class User extends Authenticatable
         return $this->belongsTo(Continent::class);
     }
 
-    public function zoned(){
-        return $this->belongsTo(Zoned::class);
+    public function zone(){
+        return $this->belongsTo(zone::class);
     }
 
     public function country(){

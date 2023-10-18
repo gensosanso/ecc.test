@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name_fr');
             $table->string('name_en')->nullable();
             $table->string('name_es')->nullable();
+            $table->string('name_pt')->nullable();
             $table->timestamps();
         });
     }

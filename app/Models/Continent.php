@@ -13,11 +13,12 @@ class Continent extends Model
         'name_fr',
         'name_en',
         'name_es',
+        'name_pt',
     ];
 
-    public function zoneds()
+    public function zones()
     {
-        return $this->hasMany(Zoned::class);
+        return $this->hasMany(zone::class);
     }
 
     public function users()
