@@ -82,11 +82,15 @@ class MessageController extends Controller
         return response()->json($messages);
     }
 
-    public function updateMessage(Request $request, $id)
+    public function updateMessage($id,Request $request )
     {
+       // print_r($request->all());
+        //var_dump($request->all());
         $message = Message::findOrFail($id);
         $message->update($request->all());
-        return response()->json($message);
+        //dd($id);
+       
+       return response()->json($message, 200);
     }
 
     public function deleteMessage($id)

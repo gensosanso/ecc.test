@@ -201,7 +201,11 @@
                               <router-link
                                     :to="{
                                         name: 'edit.messages',
+                                        params: {
+                                         messageId: message.id,
+                                         }
                                     }"
+                                    
                                 >
                                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded right-4">
                                 editer

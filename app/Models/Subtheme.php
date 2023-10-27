@@ -17,4 +17,5 @@ class Subtheme extends Model
     public function theme()
     {
         return $this->belongsTo(Theme::class);
+    }
 }

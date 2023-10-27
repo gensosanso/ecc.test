@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\DepartmentController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\MessageController;
+use App\Http\Controllers\Api\ThemeController;
+use App\Http\Controllers\Api\SubthemeController;
 use App\Http\Controllers\Api\zoneController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -77,6 +79,21 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
   
 });
+
+Route::get('/themes', [ThemeController::class, 'index'])->name('themes.index');
+Route::get('/themes/create', [ThemeController::class, 'create'])->name('themes.create');
+Route::post('/themes', [ThemeController::class, 'store'])->name('themes.store');
+Route::get('/themes/{id}/edit', [ThemeController::class, 'edit'])->name('themes.edit');
+Route::put('/themes/{id}', [ThemeController::class, 'update'])->name('themes.update');
+Route::delete('/themes/{id}', [ThemeController::class, 'destroy'])->name('themes.destroy');
+
+Route::get('/subthemes', [SubthemeController::class, 'index'])->name('subthemes.index');
+Route::get('/subthemes/create', [SubthemeController::class, 'create'])->name('subthemes.create');
+Route::post('/subthemes', [SubthemeController::class, 'store'])->name('subthemes.store');
+Route::get('/subthemes/{id}/edit', [SubthemeController::class, 'edit'])->name('subthemes.edit');
+Route::put('/subthemes/{id}', [SubthemeController::class, 'update'])->name('subthemes.update');
+Route::delete('/subthemes/{id}', [SubthemeController::class, 'destroy'])->name('subthemes.destroy');
+
 
 // les routes du controleur message
 Route::get('/allMessages', [MessageController::class, 'getAllMessages']);

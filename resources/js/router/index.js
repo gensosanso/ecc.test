@@ -120,7 +120,7 @@ const router = createRouter({
     },
     
     {
-      path: '/Messages/Edit',
+      path: '/Messages/Edit/:messageId',
       name: 'edit.messages',
       components: {
         default:() => import('@/views/frontend/message/MessageEdit.vue'),

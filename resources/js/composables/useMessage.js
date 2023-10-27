@@ -1,5 +1,5 @@
 // messagesService.js
-import { ref } from "vue";
+import { ref,reactive } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { axiosClient } from "@/axios";
 import { createConfirmDialog } from "vuejs-confirm-dialog";
@@ -16,7 +16,11 @@ export default function useMessage(){
     const loading = ref(false);
     const isFinish = ref(false);
     const messages = ref([]);
-    const message = ref({});
+    const message = reactive({
+        title: '',
+        content: '',
+        image: '',
+      });
     const selectArray = ref([]);
     const searchField = ref("username");
     const searchValue = ref("");
@@ -120,7 +124,7 @@ export default function useMessage(){
         errors.value = [];
         loading.value = true;
         await axiosClient
-            .post(`/message`, data)
+            .post(`/messages`, data)
             .then((response) => {
                 isFinish.value = true;
                 loading.value = false;
@@ -140,12 +144,21 @@ export default function useMessage(){
             });
     };
     
-    const updateMessage = async (id, data) => {
-        cleanErrors();
+    const updateMessage = async (id,data) => { 
+        errors.value = [];
         loading.value = true;
+        cleanErrors();
+        
         try {
-            await axiosClient.put(`/messages/${id}`, messageData);
-            isFinish.value = true;
+            console.log(id);
+            console.log(data);
+            await axiosClient.post(`/messages/${id}`,data).then((response) => {
+                isFinish.value = true;
+                loading.value = false;
+                console.log(response);
+            })
+
+            alert('Message updated successfully ');
         } catch (e) {
             handleErrors(e);
         } finally {
